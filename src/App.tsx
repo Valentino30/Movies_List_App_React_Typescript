@@ -1,18 +1,15 @@
-import axios from "axios";
 import { useEffect } from "react";
 
+import { useMovie } from "./hooks/movie";
+
 function App() {
+  const { getMovies, movies } = useMovie();
+
   useEffect(() => {
-    const getMovies = async () => {
-      const { REACT_APP_BASE_URL, REACT_APP_API_KEY } = process.env;
-      const response = await axios.get(
-        `${REACT_APP_BASE_URL}/search/movie?api_key=${REACT_APP_API_KEY}&query=Jack+Reacher`
-      );
-      console.log({ data: response.data });
-      return response.data;
-    };
     getMovies();
-  }, []);
+  }, [getMovies]);
+
+  console.log({ movies });
 
   return (
     <div>

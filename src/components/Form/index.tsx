@@ -7,5 +7,9 @@ type HeaderProps = {
 };
 
 export default function Form({ children, onSubmit }: HeaderProps) {
-  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
+  return (
+    <StyledForm onSubmit={onSubmit} aria-label="form">
+      {children}
+    </StyledForm>
+  );
 }

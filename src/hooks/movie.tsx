@@ -5,6 +5,7 @@ import {
   useCallback,
   createContext,
 } from "react";
+import { toast } from "react-toastify";
 
 import { getMoviesRequest } from "../api/movie";
 import { MovieContextType } from "../types/movie";
@@ -27,8 +28,14 @@ export const MovieProvider = ({ children }: { children: ReactNode }) => {
     setMovies(false);
     try {
       const movies = await getMoviesRequest(keyword);
-      setMovies(movies);
+      if (movies.length === 0) {
+        toast.error("No movies found 🤔");
+        setMovies([]);
+      } else {
+        setMovies(movies);
+      }
     } catch (error) {
+      toast.error("Something went wrong 😬");
       setMovies([]);
     }
   }, []);

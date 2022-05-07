@@ -11,7 +11,7 @@ export const StyledLi = styled.li`
     filter: unset;
     cursor: pointer;
     transform: scale(1.02);
+    border-top-color: coral;
     transition: transform .5s;
-    border-top-color: cornflowerblue;
   }
 `;

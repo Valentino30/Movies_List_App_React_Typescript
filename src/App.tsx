@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ChangeEvent, FormEvent, useState } from "react";
+
+import Header from "./components/Header";
+import SearchBar from "./containers/SearBar";
+import Container from "./components/Container";
+import MoviesList from "./containers/MoviesList";
+
+import { useMovie } from "./hooks/movie";
 
 function App() {
+  const [keyword, setKeyword] = useState("");
+  const { getMovies, movies } = useMovie();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    value && setKeyword(value);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    keyword && getMovies(keyword);
+    setKeyword("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Header title="Movies List" />
+      <SearchBar
+        keyword={keyword}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />
+      {movies ? <MoviesList movies={movies} /> : <Header title="Loading..." />}
+    </Container>
   );
 }
 

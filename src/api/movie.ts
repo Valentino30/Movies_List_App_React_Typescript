@@ -1,4 +1,5 @@
 import { api } from ".";
+import placeholder from "../assets/placeholder.jpeg";
 
 export const getMoviesRequest = async (queryParams: string) => {
   const response = await api.get("/search/movie", `query=${queryParams}`);
@@ -12,7 +13,9 @@ export const getMoviesRequest = async (queryParams: string) => {
       id: movie.id,
       title: movie.title,
       year: movie.release_date,
-      image: process.env.REACT_APP_IMG_BASE_URL + movie.backdrop_path,
+      image: movie.backdrop_path
+        ? process.env.REACT_APP_IMG_BASE_URL + movie.backdrop_path
+        : placeholder,
     })
   );
 };

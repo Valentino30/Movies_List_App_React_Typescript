@@ -9,11 +9,19 @@ function App() {
     getMovies();
   }, [getMovies]);
 
-  console.log({ movies });
-
   return (
     <div>
       <h1>Movie List</h1>
+      {movies && (
+        <ul>
+          {movies.map(({ id, title, year, image }) => (
+            <li key={id}>
+              {title}, {year}
+              <img src={image} alt="backdrop-img" />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

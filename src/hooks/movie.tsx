@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  useState,
+  ReactNode,
+  useContext,
+  useCallback,
+  createContext,
+} from "react";
 
 import { getMoviesRequest } from "../api/movie";
 import { MovieContextType } from "../types/movie";
@@ -14,7 +20,7 @@ export const useMovie = () => {
   return useContext(MovieContext);
 };
 
-export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
+export const MovieProvider = ({ children }: { children: ReactNode }) => {
   const [movies, setMovies] = useState<[] | false>([]);
 
   const getMovies = useCallback(async (keyword: string) => {

@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react";
+import { StyledInput } from "./styles";
 
 type InputProps = {
   type: string;
@@ -14,7 +15,7 @@ export default function Input({
   type,
 }: InputProps) {
   return (
-    <input
+    <StyledInput
       type={type}
       value={value}
       onChange={onChange}

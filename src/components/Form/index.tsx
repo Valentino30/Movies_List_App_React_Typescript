@@ -1,4 +1,5 @@
 import { FormEventHandler, ReactNode } from "react";
+import { StyledForm } from "./styles";
 
 type HeaderProps = {
   children: ReactNode;
@@ -6,5 +7,5 @@ type HeaderProps = {
 };
 
 export default function Form({ children, onSubmit }: HeaderProps) {
-  return <form onSubmit={onSubmit}>{children}</form>;
+  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
 }

@@ -7,5 +7,5 @@ export type MovieType = {
 
 export type MovieContextType = {
   movies: MovieType[] | [] | false;
-  getMovies: () => void;
+  getMovies: (keyword: string) => void;
 };

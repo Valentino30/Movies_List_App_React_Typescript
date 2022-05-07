@@ -5,7 +5,6 @@ import { MovieContextType } from "../types/movie";
 
 const defaultMovieContext = {
   getMovies: () => {},
-  loading: false,
   movies: [],
 };
 
@@ -16,11 +15,12 @@ export const useMovie = () => {
 };
 
 export const MovieProvider = ({ children }: { children: React.ReactNode }) => {
-  const [movies, setMovies] = useState<[] | false>(false);
+  const [movies, setMovies] = useState<[] | false>([]);
 
-  const getMovies = useCallback(async () => {
+  const getMovies = useCallback(async (keyword: string) => {
+    setMovies(false);
     try {
-      const movies = await getMoviesRequest("Jack+Reacher");
+      const movies = await getMoviesRequest(keyword);
       setMovies(movies);
     } catch (error) {
       setMovies([]);

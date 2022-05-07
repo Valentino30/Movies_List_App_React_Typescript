@@ -1,18 +1,34 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
 import { useMovie } from "./hooks/movie";
 
 function App() {
+  const [keyword, setKeyword] = useState("");
   const { getMovies, movies } = useMovie();
 
-  useEffect(() => {
-    getMovies();
-  }, [getMovies]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    value && setKeyword(value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    keyword && getMovies(keyword);
+    setKeyword("");
+  };
 
   return (
     <div>
       <h1>Movie List</h1>
-      {movies && (
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={keyword}
+          onChange={handleChange}
+          placeholder="Search Movie"
+        />
+      </form>
+      {movies ? (
         <ul>
           {movies.map(({ id, title, year, image }) => (
             <li key={id}>
@@ -21,6 +37,8 @@ function App() {
             </li>
           ))}
         </ul>
+      ) : (
+        <h1>Loading...</h1>
       )}
     </div>
   );

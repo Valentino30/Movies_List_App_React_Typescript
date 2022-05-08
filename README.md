@@ -11,7 +11,7 @@ Here is how to get started with the project:
 - Add your API key to the .env.example file and rename the file as .env
 - Run the command `yarn` in the project directory to install all dependencies
 - Run the command `yarn start` in the project directory to launch the app
-- You're good to go :)
+- Run the command `yarn test` in the project directory to run all unit tests
 
 The app will run in development mode at [http://localhost:3000](http://localhost:3000) and the page will automatically reload if you make any changes.
 
